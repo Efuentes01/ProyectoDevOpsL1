@@ -10,12 +10,13 @@ jobs:
     steps:
       - name: 🚀 Deploy nueva versión
         run: |
-          echo "🛑 Deteniendo contenedor viejo si existe..."
-          docker stop proyectodevopsl1 || echo "No hay contenedor corriendo"
-          docker rm proyectodevopsl1 || echo "No hay contenedor viejo"
-          
-          echo "⬇️ Descargando última imagen..."
+          Write-Host "🛑 Deteniendo contenedor viejo si existe..."
+          try { docker stop proyectodevopsl1 } catch { Write-Host "No hay contenedor corriendo" }
+          try { docker rm proyectodevopsl1 } catch { Write-Host "No hay contenedor viejo" }
+
+          Write-Host "⬇️ Descargando última imagen..."
           docker pull eliudfuentes/proyectodevopsl1:latest
-          
-          echo "🚀 Corriendo nueva versión..."
+
+          Write-Host "🚀 Corriendo nueva versión..."
           docker run -d --name proyectodevopsl1 -p 3000:3000 eliudfuentes/proyectodevopsl1:latest
+
