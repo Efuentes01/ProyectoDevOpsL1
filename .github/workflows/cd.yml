@@ -1,7 +1,10 @@
 name: CD Pipeline 🚀
 
 on:
-  workflow_dispatch:  # 🔥 Se ejecuta manualmente
+  workflow_run:
+    workflows: ["CI Pipeline 🚀"] # 👈 Nombre exacto del workflow CI
+    types:
+      - completed
 
 jobs:
   deploy:
